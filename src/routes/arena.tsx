@@ -30,9 +30,9 @@ type ArenaSearch = { opponent?: CharacterId; topic?: string; custom?: boolean };
 export const Route = createFileRoute("/arena")({
   validateSearch: (search: Record<string, unknown>): ArenaSearch => {
     const out: ArenaSearch = {};
-    if (typeof search.opponent === "string" && getCharacter(search.opponent)) out.opponent = search.opponent as CharacterId;
-    if (typeof search.topic === "string" && TOPICS.some((t) => t.id === search.topic)) out.topic = search.topic;
-    if (search.custom === true || search.custom === "true") out.custom = true;
+    if (typeof search["opponent"] === "string" && getCharacter(search["opponent"])) out.opponent = search["opponent"] as CharacterId;
+    if (typeof search["topic"] === "string" && TOPICS.some((t) => t.id === search["topic"])) out.topic = search["topic"];
+    if (search["custom"] === true || search["custom"] === "true") out.custom = true;
     return out;
   },
   head: () => ({
@@ -102,14 +102,14 @@ function ArenaForm() {
   const navigate = useNavigate();
   const { userId } = useVoxora();
 
-  const [opponent, setOpponent] = useState<CharacterId>(search.opponent ?? "strategist");
-  const [isCustom, setIsCustom] = useState(!!search.custom);
-  const [topicId, setTopicId] = useState<string>(search.topic ?? TOPICS[0]!.id);
+  const [opponent, setOpponent] = useState<CharacterId>(search["opponent"] ?? "strategist");
+  const [isCustom, setIsCustom] = useState(!!search["custom"]);
+  const [topicId, setTopicId] = useState<string>(search["topic"] ?? TOPICS[0]!.id);
   const [customTitle, setCustomTitle] = useState("");
   const [customDesc, setCustomDesc] = useState("");
   const [position, setPosition] = useState<Position>("for");
   const [difficulty, setDifficulty] = useState<Difficulty>(
-    () => TOPICS.find((t) => t.id === (search.topic ?? ""))?.suggested ?? "medium",
+    () => TOPICS.find((t) => t.id === (search["topic"] ?? ""))?.suggested ?? "medium",
   );
   const [mode, setMode] = useState<DebateMode>("quick");
   const [starting, setStarting] = useState(false);

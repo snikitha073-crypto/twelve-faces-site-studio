@@ -11,9 +11,14 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ArenaRouteImport } from './routes/arena'
+import { Route as HistoryRouteImport } from './routes/history'
+import { Route as LeaderboardRouteImport } from './routes/leaderboard'
 import { Route as OpponentsRouteImport } from './routes/opponents'
+import { Route as ProfileRouteImport } from './routes/profile'
+import { Route as ProgressRouteImport } from './routes/progress'
 import { Route as TopicsRouteImport } from './routes/topics'
 import { Route as ApiDebateChatRouteImport } from './routes/api/debate-chat'
+import { Route as DebateIdRouteImport } from './routes/debate.$id'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -25,9 +30,29 @@ const ArenaRoute = ArenaRouteImport.update({
   path: '/arena',
   getParentRoute: () => rootRouteImport,
 } as any)
+const HistoryRoute = HistoryRouteImport.update({
+  id: '/history',
+  path: '/history',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LeaderboardRoute = LeaderboardRouteImport.update({
+  id: '/leaderboard',
+  path: '/leaderboard',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const OpponentsRoute = OpponentsRouteImport.update({
   id: '/opponents',
   path: '/opponents',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProfileRoute = ProfileRouteImport.update({
+  id: '/profile',
+  path: '/profile',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProgressRoute = ProgressRouteImport.update({
+  id: '/progress',
+  path: '/progress',
   getParentRoute: () => rootRouteImport,
 } as any)
 const TopicsRoute = TopicsRouteImport.update({
@@ -40,44 +65,99 @@ const ApiDebateChatRoute = ApiDebateChatRouteImport.update({
   path: '/api/debate-chat',
   getParentRoute: () => rootRouteImport,
 } as any)
+const DebateIdRoute = DebateIdRouteImport.update({
+  id: '/debate/$id',
+  path: '/debate/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/arena': typeof ArenaRoute
+  '/history': typeof HistoryRoute
+  '/leaderboard': typeof LeaderboardRoute
   '/opponents': typeof OpponentsRoute
+  '/profile': typeof ProfileRoute
+  '/progress': typeof ProgressRoute
   '/topics': typeof TopicsRoute
   '/api/debate-chat': typeof ApiDebateChatRoute
+  '/debate/$id': typeof DebateIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/arena': typeof ArenaRoute
+  '/history': typeof HistoryRoute
+  '/leaderboard': typeof LeaderboardRoute
   '/opponents': typeof OpponentsRoute
+  '/profile': typeof ProfileRoute
+  '/progress': typeof ProgressRoute
   '/topics': typeof TopicsRoute
   '/api/debate-chat': typeof ApiDebateChatRoute
+  '/debate/$id': typeof DebateIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/arena': typeof ArenaRoute
+  '/history': typeof HistoryRoute
+  '/leaderboard': typeof LeaderboardRoute
   '/opponents': typeof OpponentsRoute
+  '/profile': typeof ProfileRoute
+  '/progress': typeof ProgressRoute
   '/topics': typeof TopicsRoute
   '/api/debate-chat': typeof ApiDebateChatRoute
+  '/debate/$id': typeof DebateIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/arena' | '/opponents' | '/topics' | '/api/debate-chat'
+  fullPaths:
+    | '/'
+    | '/arena'
+    | '/history'
+    | '/leaderboard'
+    | '/opponents'
+    | '/profile'
+    | '/progress'
+    | '/topics'
+    | '/api/debate-chat'
+    | '/debate/$id'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/arena' | '/opponents' | '/topics' | '/api/debate-chat'
+  to:
+    | '/'
+    | '/arena'
+    | '/history'
+    | '/leaderboard'
+    | '/opponents'
+    | '/profile'
+    | '/progress'
+    | '/topics'
+    | '/api/debate-chat'
+    | '/debate/$id'
   id:
-    '__root__' | '/' | '/arena' | '/opponents' | '/topics' | '/api/debate-chat'
+    | '__root__'
+    | '/'
+    | '/arena'
+    | '/history'
+    | '/leaderboard'
+    | '/opponents'
+    | '/profile'
+    | '/progress'
+    | '/topics'
+    | '/api/debate-chat'
+    | '/debate/$id'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   ArenaRoute: typeof ArenaRoute
+  HistoryRoute: typeof HistoryRoute
+  LeaderboardRoute: typeof LeaderboardRoute
   OpponentsRoute: typeof OpponentsRoute
+  ProfileRoute: typeof ProfileRoute
+  ProgressRoute: typeof ProgressRoute
   TopicsRoute: typeof TopicsRoute
   ApiDebateChatRoute: typeof ApiDebateChatRoute
+  DebateIdRoute: typeof DebateIdRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -96,11 +176,39 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ArenaRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/history': {
+      id: '/history'
+      path: '/history'
+      fullPath: '/history'
+      preLoaderRoute: typeof HistoryRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/leaderboard': {
+      id: '/leaderboard'
+      path: '/leaderboard'
+      fullPath: '/leaderboard'
+      preLoaderRoute: typeof LeaderboardRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/opponents': {
       id: '/opponents'
       path: '/opponents'
       fullPath: '/opponents'
       preLoaderRoute: typeof OpponentsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/profile': {
+      id: '/profile'
+      path: '/profile'
+      fullPath: '/profile'
+      preLoaderRoute: typeof ProfileRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/progress': {
+      id: '/progress'
+      path: '/progress'
+      fullPath: '/progress'
+      preLoaderRoute: typeof ProgressRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/topics': {
@@ -117,15 +225,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiDebateChatRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/debate/$id': {
+      id: '/debate/$id'
+      path: '/debate/$id'
+      fullPath: '/debate/$id'
+      preLoaderRoute: typeof DebateIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   ArenaRoute: ArenaRoute,
+  HistoryRoute: HistoryRoute,
+  LeaderboardRoute: LeaderboardRoute,
   OpponentsRoute: OpponentsRoute,
+  ProfileRoute: ProfileRoute,
+  ProgressRoute: ProgressRoute,
   TopicsRoute: TopicsRoute,
   ApiDebateChatRoute: ApiDebateChatRoute,
+  DebateIdRoute: DebateIdRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
