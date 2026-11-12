@@ -10,11 +10,29 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ArenaRouteImport } from './routes/arena'
+import { Route as OpponentsRouteImport } from './routes/opponents'
+import { Route as TopicsRouteImport } from './routes/topics'
 import { Route as ApiDebateChatRouteImport } from './routes/api/debate-chat'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ArenaRoute = ArenaRouteImport.update({
+  id: '/arena',
+  path: '/arena',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const OpponentsRoute = OpponentsRouteImport.update({
+  id: '/opponents',
+  path: '/opponents',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TopicsRoute = TopicsRouteImport.update({
+  id: '/topics',
+  path: '/topics',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ApiDebateChatRoute = ApiDebateChatRouteImport.update({
@@ -25,27 +43,40 @@ const ApiDebateChatRoute = ApiDebateChatRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/arena': typeof ArenaRoute
+  '/opponents': typeof OpponentsRoute
+  '/topics': typeof TopicsRoute
   '/api/debate-chat': typeof ApiDebateChatRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/arena': typeof ArenaRoute
+  '/opponents': typeof OpponentsRoute
+  '/topics': typeof TopicsRoute
   '/api/debate-chat': typeof ApiDebateChatRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/arena': typeof ArenaRoute
+  '/opponents': typeof OpponentsRoute
+  '/topics': typeof TopicsRoute
   '/api/debate-chat': typeof ApiDebateChatRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/api/debate-chat'
+  fullPaths: '/' | '/arena' | '/opponents' | '/topics' | '/api/debate-chat'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/api/debate-chat'
-  id: '__root__' | '/' | '/api/debate-chat'
+  to: '/' | '/arena' | '/opponents' | '/topics' | '/api/debate-chat'
+  id:
+    '__root__' | '/' | '/arena' | '/opponents' | '/topics' | '/api/debate-chat'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ArenaRoute: typeof ArenaRoute
+  OpponentsRoute: typeof OpponentsRoute
+  TopicsRoute: typeof TopicsRoute
   ApiDebateChatRoute: typeof ApiDebateChatRoute
 }
 
@@ -56,6 +87,27 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/arena': {
+      id: '/arena'
+      path: '/arena'
+      fullPath: '/arena'
+      preLoaderRoute: typeof ArenaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/opponents': {
+      id: '/opponents'
+      path: '/opponents'
+      fullPath: '/opponents'
+      preLoaderRoute: typeof OpponentsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/topics': {
+      id: '/topics'
+      path: '/topics'
+      fullPath: '/topics'
+      preLoaderRoute: typeof TopicsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/api/debate-chat': {
@@ -70,6 +122,9 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ArenaRoute: ArenaRoute,
+  OpponentsRoute: OpponentsRoute,
+  TopicsRoute: TopicsRoute,
   ApiDebateChatRoute: ApiDebateChatRoute,
 }
 export const routeTree = rootRouteImport
