@@ -154,7 +154,7 @@ function Bubble({
   const text = textOf(message);
   return (
     <div className={cn("flex gap-3", mine && "flex-row-reverse")}>
-      {mine ? <UserAvatar value={profile?.avatar_url} name={profile?.display_name} size="sm" /> : <CharacterAvatar id={character.id} size="sm" />}
+      {mine ? <UserAvatar value={profile?.avatar_url} name={profile?.display_name ?? null} size="sm" /> : <CharacterAvatar id={character.id} size="sm" />}
       <div className={cn("max-w-[85%] space-y-1 sm:max-w-[75%]", mine && "items-end text-right")}>
         <div className={cn("flex items-center gap-2 text-xs font-semibold", mine ? "justify-end text-muted-foreground" : character.accentClass)}>
           {mine ? "You" : character.name}
